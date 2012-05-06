@@ -6,16 +6,10 @@ Vim plugin and command line tool for running [JSHint][].
 [JSHint]: http://jshint.com/
 
 
-<<<<<<< HEAD
-moar to come soon...
-=======
-This is alpha software and is under heavy development.
-
-
 Installation
 -----------------------
 
-- Make sure you have a JavaScript interpreter installed.  On Linux jslint.vim
+- Make sure you have a JavaScript interpreter installed.  On Linux jshint.vim
   supports Spidermonkey, Rhino, and node.js.  Spidermonkey or node.js are
   recommended because Rhino tends to have a long startup time.
 
@@ -64,11 +58,11 @@ Usage
   You can modify your `~/.vimrc` file to bind this command to a key or to turn
   off error checking by default.
 
-- (optional) Add any valid JSLint options to `~/.jslintrc` file, they will be
+- (optional) Add any valid JSHint options to `~/.jshintrc` file, they will be
   used as global options for all JavaScript files.
   For example:
 
-        /*jslint browser: true, regexp: true */
+        /*jshint browser: true, regexp: true */
         /*global jQuery, $ */
 
         /* vim: set ft=javascript: */
@@ -89,7 +83,7 @@ To disable error highlighting altogether add this line to your `~/.vimrc` file:
 Working with quickfix
 ------------------------
 
-When automatic error checking is enabled jslint.vim will automatically display
+When automatic error checking is enabled jshint.vim will automatically display
 errors in the [quickfix][] window in addition to highlighting them.
 
 You can open and close the quickfix window with the commands `:copen` and
@@ -100,26 +94,6 @@ to a specific error, where `[nr]` is a number.  The first error in the list is
 Once an error is fixed the corresponding quickfix line will disappear.
 
 [quickfix]: http://vimdoc.sourceforge.net/htmldoc/quickfix.html  "Vim documentation: quickfix"
-
-
-Alternative Plugins
----------------------
-
-There are other plugins for Vim that integrate [JavaScript Lint][].  JavaScript
-Lint is another JavaScript checker that is similar to JSLint.
-
-[JavaScript Lint]: http://www.javascriptlint.com/
-
-[jsl.vim][] uses Vim's compiler infrastructure making its use consistent with
-syntax checkers for other languages.
-
-[jsl.vim]: http://www.vim.org/scripts/script.php?script_id=2630
-
-[javaScriptLint.vim][] runs the contents of a JavaScript file through
-JavaScript Lint after the file's buffer is saved and places any warnings in the
-quickfix error window.
-
-[javaScriptLint.vim]: http://www.vim.org/scripts/script.php?script_id=2578
 
 
 Credits
@@ -175,4 +149,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
->>>>>>> jslint/master

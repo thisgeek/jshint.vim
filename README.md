@@ -1,3 +1,44 @@
+# jshint.vim
+
+This plugin is a front for the jshint NodeJS cli module.
+This plugin will allow you to run jshint from vim, and shows the results in a split window.
+
+## Installation
+
+
+### jshint
+
+You have to install [jshint](http://jshint.org/), of course.
+
+Install on a system with npm:
+
+    npm install jshint
+
+Otherwise, you are on your own.
+
+### The Plugin
+
+Use [pathogen.vim](https://github.com/vim-scripts/pathogen.vim)
+
+
+## Usage
+
+    :JSHint {file}
+
+It default to current file.
+
+### Keyboard Shortcuts
+
+In the quickfix window, you can use:
+
+    o to open in new window
+    go to preview file (open but maintain focus on jshint results)
+    q to close the quickfix window
+
+
+
+## License
+
 Copyright (c) 2011 Andreas Wålm <andreas@walm.net>, except where otherwise 
 noted.
 

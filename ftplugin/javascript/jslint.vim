@@ -57,8 +57,15 @@ noremap <buffer><silent> <C-R> <C-R>:JSLintUpdate<CR>
 
 " Set up command and parameters
 if has("win32")
-  let s:cmd = 'cscript /NoLogo '
-  let s:runjslint_ext = 'wsf'
+  let s:runjslint_ext = 'js'
+  if exists("%JS_CMD%")
+    let s:cmd = "$JS_CMD"
+  elseif executable('node')
+    let s:cmd = "node"
+  else
+    let s:cmd = 'cscript /NoLogo '
+    let s:runjslint_ext = 'wsf'
+  endif
 else
   let s:runjslint_ext = 'js'
   if exists("$JS_CMD")
@@ -79,7 +86,11 @@ let s:plugin_path = s:install_dir . "/jslint/"
 if has('win32')
   let s:plugin_path = substitute(s:plugin_path, '/', '\', 'g')
 endif
-let s:cmd = 'cd "' . s:plugin_path . '" && ' . s:cmd . ' "' . s:plugin_path . 'runjslint.' . s:runjslint_ext . '"'
+if has('win32')
+  let s:cmd = '"cd /d "' . s:plugin_path . '" && ' . s:cmd . ' "' . s:plugin_path . 'runjslint.' . s:runjslint_ext . '""'
+else
+  let s:cmd = 'cd "' . s:plugin_path . '" && ' . s:cmd . ' "' . s:plugin_path . 'runjslint.' . s:runjslint_ext . '"'
+endif
 
 let s:jshintrc_file = expand('~/.jshintrc')
 if filereadable(s:jshintrc_file)
@@ -165,10 +176,14 @@ function! s:JSLint()
   if len(lines) == 0
     return
   endif
-  let old_shell = &shell
-  let &shell = '/bin/bash'
-  let b:jslint_output = system(s:cmd, lines . "\n")
-  let &shell = old_shell
+  if has('win32') || has('win64')
+    let b:jslint_output = system(s:cmd, lines . "\n")
+  else
+    let old_shell = &shell
+    let &shell = '/bin/bash'
+    let b:jslint_output = system(s:cmd, lines . "\n")
+    let &shell = old_shell
+  endif
   if v:shell_error
     echoerr b:jshint_output
     echoerr 'could not invoke JSLint!'
